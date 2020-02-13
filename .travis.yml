@@ -15,6 +15,7 @@ install:
 - pip3 install codecov
 - pip3 install pytest
 - pip3 install pytest-cov
+- pip3 install .[test]
 
 script:
 - python -m pytest --cov=versiongit_test --log-format='%(asctime)s.%(msecs)03d %(filename)-25s
