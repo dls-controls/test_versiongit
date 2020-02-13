@@ -17,7 +17,7 @@ install:
 - pip3 install pytest-cov
 
 script:
-- python -m pytest --cov=gphotos --log-format='%(asctime)s.%(msecs)03d %(filename)-25s
+- python -m pytest --cov=versiongit_test --log-format='%(asctime)s.%(msecs)03d %(filename)-25s
   %(lineno)4d %(levelname)-8s %(message)s' --log-date-format='%Y-%m-%d %H:%M:%S' --log-level
   debug
 
