@@ -5,6 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 versiongit = {path = "./../versiongit"}
+pytest = "*"
+pytest-cov = "*"
+codecov = "*"
 
 [packages]
 
