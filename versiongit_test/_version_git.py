@@ -69,12 +69,11 @@ def get_cmdclass(build_py=None, sdist=None):
     def make_version_static(base_dir, pkg):
         # Only place _version_static in the root directory of a module
         pkg = pkg.split(".")[0]
-        with open(os.path.join(base_dir, pkg, "_version_static.py"), "w") as f:
-            f.write("__version__ = %r\n" % __version__)
-        print(f"****** writing _version_static with version {__version__}")
-        if "unknown" in __version__:
-            raise RuntimeError("bad version number")
-        # raise RuntimeError("erroring to print some stuff")
+        if "unknown" not in __version__:
+            with open(os.path.join(base_dir, pkg, "_version_static.py"), "w") as f:
+                f.write("__version__ = %r\n" % __version__)
+            print(f"****** writing _version_static with version {__version__}")
+        print(f"***** skipping _versionStatic write")
 
     class BuildPy(build_py):
         def run(self):
