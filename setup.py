@@ -1,27 +1,16 @@
 #!/usr/bin/env python3
 
 import sys
-from setuptools import setup, find_packages
-from pathlib import Path
-
+from setuptools import setup, find_packages, os
 
 module_name = "test_versiongit"
 
 # Place the directory containing _version_git on the path
-# for path, _, filenames in os.walk(os.path.dirname(os.path.abspath(__file__))):
-#     if "_version_git.py" in filenames:
-#         sys.path.append(path)
-#         break
-package_path = Path(__file__).parent / 'versiongit_test'
-
-print("*******  Setup.py Checks *********")
-print(f"adding {package_path} to sys.path")
-file_list = package_path.parent.glob('**/*')
-for f in file_list:
-    print(f" - {f}")
-
-
-sys.path.append(str(package_path))
+for path, _, filenames in os.walk(os.path.dirname(os.path.abspath(__file__))):
+    if "_version_git.py" in filenames:
+        print(f"****** adding {path} to sys.path")
+        sys.path.append(path)
+        break
 
 from _version_git import get_cmdclass, __version__  # noqa: E402
 

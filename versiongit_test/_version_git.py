@@ -78,14 +78,14 @@ def get_cmdclass(build_py=None, sdist=None):
 
     class BuildPy(build_py):
         def run(self):
-            print("***** BuildPy run")
+            print("***** CALL TO  BuildPy.run()")
             build_py.run(self)
             for pkg in self.packages:
                 make_version_static(self.build_lib, pkg)
 
     class Sdist(sdist):
         def make_release_tree(self, base_dir, files):
-            print("***** Sdist make release tree")
+            print("***** CALL to Sdist.make_release_tree()")
             sdist.make_release_tree(self, base_dir, files)
             for pkg in self.distribution.packages:
                 make_version_static(base_dir, pkg)
