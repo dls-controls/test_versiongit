@@ -18,6 +18,7 @@ def get_version_from_git(path=None):
         path = os.path.dirname(os.path.abspath(__file__))
     tag, plus, sha1, dirty, error = "0", "unknown", "error", "", None
     if not GIT_ARCHIVE_HASH.startswith("$"):
+        print(f"git archive hash: {GIT_ARCHIVE_HASH}")
         # git archive has written a sha1 for us to use
         sha1 = GIT_ARCHIVE_HASH
         for ref_name in GIT_ARCHIVE_REF_NAMES.split(", "):
@@ -29,7 +30,10 @@ def get_version_from_git(path=None):
         # output is TAG-NUM-gHEX[-dirty] or HEX[-dirty]
         try:
             out = check_output(git_cmd.split(), stderr=STDOUT).decode().strip()
+            print(f"git command: {git_cmd}")
+            print(f"git command output: {out}")
         except Exception as e:
+            print(f"git exception: {e}")
             error = e
         else:
             if out.endswith("-dirty"):
@@ -67,6 +71,8 @@ def get_cmdclass(build_py=None, sdist=None):
         pkg = pkg.split(".")[0]
         with open(os.path.join(base_dir, pkg, "_version_static.py"), "w") as f:
             f.write("__version__ = %r\n" % __version__)
+        if "unknown" in __version__:
+            raise RuntimeError("bad version number")
 
     class BuildPy(build_py):
         def run(self):

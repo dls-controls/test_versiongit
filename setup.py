@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from setuptools import setup, find_packages, os
+from setuptools import setup, find_packages
 from pathlib import Path
 
 
@@ -13,7 +13,14 @@ module_name = "test_versiongit"
 #         sys.path.append(path)
 #         break
 package_path = Path(__file__).parent / 'versiongit_test'
+
+print("*******  Setup.py Checks *********")
 print(f"adding {package_path} to sys.path")
+file_list = package_path.parent.glob('**/*')
+for f in file_list:
+    print(" - {f}")
+
+
 sys.path.append(str(package_path))
 
 from _version_git import get_cmdclass, __version__  # noqa: E402
@@ -45,7 +52,7 @@ setup(
     description="test versioingit versioning under Travis pypi deploy",
     packages=packages,
     entry_points={
-        "console_scripts": ["hello = versioingit_test.main:main"]
+        "console_scripts": ["hello = versiongit_test.main:main"]
         },
     long_description=long_description,
     install_requires=install_reqs,
