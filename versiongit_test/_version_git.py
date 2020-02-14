@@ -62,7 +62,8 @@ def get_cmdclass(build_py=None, sdist=None):
     """Create cmdclass dict to pass to setuptools.setup that will write a
     _version_static.py file in our resultant sdist, wheel or egg"""
     if build_py is None:
-        from setuptools.command.build_py import build_py
+        from setuptools.command.build_py
+         import build_py
     if sdist is None:
         from setuptools.command.sdist import sdist
 
@@ -71,6 +72,7 @@ def get_cmdclass(build_py=None, sdist=None):
         pkg = pkg.split(".")[0]
         with open(os.path.join(base_dir, pkg, "_version_static.py"), "w") as f:
             f.write("__version__ = %r\n" % __version__)
+        print(f"writing _version_static with version {__version__}")
         if "unknown" in __version__:
             raise RuntimeError("bad version number")
 

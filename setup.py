@@ -18,7 +18,7 @@ print("*******  Setup.py Checks *********")
 print(f"adding {package_path} to sys.path")
 file_list = package_path.parent.glob('**/*')
 for f in file_list:
-    print(" - {f}")
+    print(f" - {f}")
 
 
 sys.path.append(str(package_path))
