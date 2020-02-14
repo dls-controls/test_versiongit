@@ -62,8 +62,7 @@ def get_cmdclass(build_py=None, sdist=None):
     """Create cmdclass dict to pass to setuptools.setup that will write a
     _version_static.py file in our resultant sdist, wheel or egg"""
     if build_py is None:
-        from setuptools.command.build_py
-         import build_py
+        from setuptools.command.build_py import build_py
     if sdist is None:
         from setuptools.command.sdist import sdist
 
