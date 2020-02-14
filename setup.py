@@ -2,17 +2,20 @@
 
 import sys
 from setuptools import setup, find_packages, os
+from pathlib import Path
 
 
 module_name = "test_versiongit"
 
 # Place the directory containing _version_git on the path
-for path, _, filenames in os.walk(os.path.dirname(os.path.abspath(__file__))):
-    if "_version_git.py" in filenames:
-        sys.path.append(path)
-        break
+# for path, _, filenames in os.walk(os.path.dirname(os.path.abspath(__file__))):
+#     if "_version_git.py" in filenames:
+#         sys.path.append(path)
+#         break
+package_path = Path(__file__) / 'versiongit_test'
+sys.path.append(str(package_path.parent.absolute))
 
-from _version_git import get_cmdclass, __version__
+from _version_git import get_cmdclass, __version__  # noqa: E402
 
 install_reqs = [
 
@@ -22,6 +25,7 @@ develop_reqs = [
     "pytest",
     "mock",
     "black"
+
 ]
 
 with open("README.rst", "rb") as f:
@@ -40,7 +44,7 @@ setup(
     description="test versioingit versioning under Travis pypi deploy",
     packages=packages,
     entry_points={
-        "console_scripts": ["test versioingit = test_versioingit.main:main"]
+        "console_scripts": ["hello = versioingit_test.main:main"]
         },
     long_description=long_description,
     install_requires=install_reqs,
