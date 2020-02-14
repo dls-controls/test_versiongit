@@ -1,3 +1,4 @@
 {
-    "restructuredtext.confPath": "${workspaceFolder}/docs"
+    "restructuredtext.confPath": "${workspaceFolder}/docs",
+    "python.pythonPath": "/scratch/hgv27681/pipenv/test_versiongit-yU0xVzmF/bin/python"
 }
