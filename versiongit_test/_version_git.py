@@ -58,7 +58,8 @@ def get_version_from_git(path=None):
 
 try:
     # In a release there will be a static version file written by setup.py
-    from ._version_static import __version__  # type: ignore
+    # during setup it will be on the python path (see setup.py: os.walk)
+    from _version_static import __version__  # type: ignore
 except ImportError:
     # Otherwise get the release number from git describe
     __version__, git_error, git_sha1 = get_version_from_git()
@@ -77,9 +78,11 @@ def get_cmdclass(build_py=None, sdist=None):
         pkg = pkg.split(".")[0]
         static_version = os.path.join(base_dir, pkg, "_version_static.py")
         if "unknown" in __version__:
-            file_list = Path.cwd.glob('**/*')
+            file_list = Path.cwd().glob('**/*')
             for f in file_list:
                 print(f" - {f}")
+            from _version_static import __version__ as v
+            print(f"version appears to be {v}")
             raise RuntimeError("unknown version in make_version_static")
         if not os.path.exists(static_version):
             with open(static_version, "w") as f:
