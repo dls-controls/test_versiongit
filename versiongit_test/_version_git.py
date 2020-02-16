@@ -4,6 +4,7 @@
 # versiongit-0.1+66.e5e165d.dirty (https://github.com/dls-controls/versiongit)
 import os
 import re
+from pathlib import Path
 from subprocess import check_output, STDOUT
 
 # These will be filled in if git archive is run
@@ -75,6 +76,11 @@ def get_cmdclass(build_py=None, sdist=None):
         # Only place _version_static in the root directory of a module
         pkg = pkg.split(".")[0]
         static_version = os.path.join(base_dir, pkg, "_version_static.py")
+        if "unknown" in __version__:
+            file_list = Path.cwd.glob('**/*')
+            for f in file_list:
+                print(f" - {f}")
+            raise RuntimeError("unknown version in make_version_static")
         if not os.path.exists(static_version):
             with open(static_version, "w") as f:
                 f.write("__version__ = %r\n" % __version__)
