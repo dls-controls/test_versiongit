@@ -69,9 +69,9 @@ def get_cmdclass(build_py=None, sdist=None):
         # Replace VERSION_STATIC in _version_git.py
         if os.path.isfile(vg):
             text = open(vg).read()
-            open(vg).write(
+            open(vg, "w").write(
                 text.replace(
-                    "\nVERSION_STATIC = None", "\nVERSION_STATIC = %s" % __version__
+                    "\nVERSION_STATIC = None", "\nVERSION_STATIC = %r" % __version__
                 )
             )
 
